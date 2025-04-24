@@ -11,10 +11,10 @@ export const getVenta = async (id) => {
 };
 
 export const createVenta = async (venta) => {
-  const { fecha, producto, cantidad } = venta;
+  const { producto, cantidad } = venta;
   const [result] = await pool.query(
-    'INSERT INTO ventas (fecha, producto, cantidad) VALUES (?, ?, ?)',
-    [fecha, producto, cantidad]
+    'INSERT INTO ventas (producto, cantidad) VALUES (?, ?)',
+    [producto, cantidad]
   );
   return result.insertId;
 };

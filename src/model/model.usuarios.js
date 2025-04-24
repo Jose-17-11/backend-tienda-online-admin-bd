@@ -13,7 +13,7 @@ export const getUsuario = async (id) => {
 export const createUsuario = async (usuario) => {
   const { nombre, correo, contraseña, tipo } = usuario;
   const [result] = await pool.query(
-    'INSERT INTO usuarios (nombre, correo, contraseña, tipo) VALUES (?, ?, ?, ?)',
+    'INSERT INTO usuarios (nombre, correo, contrasena, tipo) VALUES (?, ?, ?, ?)',
     [nombre, correo, contraseña, tipo]
   );
   return result.insertId;
@@ -22,7 +22,7 @@ export const createUsuario = async (usuario) => {
 export const updateUsuario = async (id, usuario) => {
   const { nombre, correo, contraseña, tipo } = usuario;
   const [result] = await pool.query(
-    'UPDATE usuarios SET nombre = ?, correo = ?, contraseña = ?, tipo = ? WHERE ID = ?',
+    'UPDATE usuarios SET nombre = ?, correo = ?, contrasena = ?, tipo = ? WHERE ID = ?',
     [nombre, correo, contraseña, tipo, id]
   );
   return result.affectedRows;
@@ -34,6 +34,6 @@ export const deleteUsuario = async (id) => {
 };
 
 export const loginUsuario = async (correo, contraseña) => {
-  const [rows] = await pool.query('SELECT ID, nombre, correo, tipo FROM usuarios WHERE correo = ? AND contraseña = ?', [correo, contraseña]);
+  const [rows] = await pool.query('SELECT ID, nombre, correo, tipo FROM usuarios WHERE correo = ? AND contrasena = ?', [correo, contraseña]);
   return rows[0];
 };
