@@ -56,11 +56,18 @@ export const eliminarUsuario = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { correo, contraseña } = req.body;
-    const usuario = await usuarioModel.loginUsuario(correo, contraseña);
+    const { correo, contrasena } = req.body;
+    
+    if (!correo || !contrasena) {
+      return res.status(400).json({ message: 'Correo y contraseña son requeridos' });
+    }
+    
+    const usuario = await usuarioModel.loginUsuario(correo, contrasena);
+    
     if (!usuario) {
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
+    
     res.json(usuario);
   } catch (error) {
     res.status(500).json({ error: error.message });
