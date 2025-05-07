@@ -53,3 +53,18 @@ export const eliminarVenta = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const verificarStock = async (req, res) => {
+  try {
+    const { productoId, cantidad } = req.body;
+    
+    if (!productoId || !cantidad) {
+      return res.status(400).json({ error: "Se requieren productoId y cantidad" });
+    }
+
+    const hayStock = await ventaModel.checkStock(productoId, cantidad);
+    res.json({ tieneStock: hayStock });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

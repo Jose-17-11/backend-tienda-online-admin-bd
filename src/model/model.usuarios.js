@@ -11,10 +11,10 @@ export const getUsuario = async (id) => {
 };
 
 export const createUsuario = async (usuario) => {
-  const { nombre, correo, contraseña, tipo } = usuario;
+  const { nombre, correo, contrasena, tipo } = usuario;
   const [result] = await pool.query(
     'INSERT INTO usuarios (nombre, correo, contrasena, tipo) VALUES (?, ?, ?, ?)',
-    [nombre, correo, contraseña, tipo]
+    [nombre, correo, contrasena, tipo]
   );
   return result.insertId;
 };

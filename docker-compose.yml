@@ -25,6 +25,7 @@ services:
       MYSQL_DATABASE: tienda_online
       MYSQL_USER: tienda_user
       MYSQL_PASSWORD: tienda_pass
+      ENCRYPTION_KEY: tu-clave-secreta-de-32-caracteres-aqui123
     ports:
       - "3307:3306"  # Puerto alternativo para MySQL
     volumes:

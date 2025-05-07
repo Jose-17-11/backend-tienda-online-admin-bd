@@ -9,4 +9,6 @@ router.post('/', ventaController.crearVenta);
 router.put('/:id', ventaController.actualizarVenta);
 router.delete('/:id', ventaController.eliminarVenta);
 
+router.post('/check-stock', ventaController.verificarStock);
+
 export default router;

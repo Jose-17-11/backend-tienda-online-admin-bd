@@ -139,19 +139,24 @@ Content-Type: application/json
 - Body:
 ```json
 {
-  "producto": "Tablet",
-  "descripcion": "Tablet de 10 pulgadas",
-  "cantidad": 15
+  "producto": "Nombre del Producto",
+  "descripcion": "Descripción detallada del producto",
+  "cantidad": 100,
+  "imagen": "url_de_la_imagen.jpg",
+  "precio": 19.99
 }
 ```
 
 **Response exitoso (201):**
 ```json
 {
-  "id": 3,
-  "producto": "Tablet",
-  "descripcion": "Tablet de 10 pulgadas",
-  "cantidad": 15
+{
+  "producto": "Nombre del Producto",
+  "descripcion": "Descripción detallada del producto",
+  "cantidad": 100,
+  "imagen": "url_de_la_imagen.jpg",
+  "precio": 19.99
+}
 }
 ```
 
@@ -166,9 +171,8 @@ Content-Type: application/json
 - Body:
 ```json
 {
-  "producto": "Tablet Pro",
-  "descripcion": "Tablet de 10 pulgadas versión Pro",
-  "cantidad": 12
+  "imagen": "url_de_la_imagen-12.jpg",
+  "precio": 199.99
 }
 ```
 
@@ -278,8 +282,8 @@ Content-Type: application/json
 {
   "nombre": "Nuevo Usuario",
   "correo": "nuevo@tienda.com",
-  "contraseña": "nuevo123",
-  "tipo": "cliente"
+  "contrasena": "nuevo123",
+  "tipo": "admin"
 }
 ```
 
@@ -301,6 +305,9 @@ Content-Type: application/json
 |--------|------------|-------------------------|
 | GET    | `/ventas`  | Obtener todas las ventas |
 | POST   | `/ventas`  | Registrar nueva venta    |
+| PUT   | `/ventas/id`  | Actualizar una venta    |
+| DELETE   | `/ventas/id`  | Eliminar una venta    |
+| POST   | `/ventas/check-stock`  | Verificar existencias    |
 
 ### GET /ventas - Obtener todas las ventas
 
@@ -340,20 +347,81 @@ Content-Type: application/json
 - Body:
 ```json
 {
-  "producto": 1,
-  "cantidad": 1
+  "usuario_id": 4,
+  "productos": [
+    {
+      "id": 2,  
+      "cantidad": 1,
+      "precio_unitario": 29.99
+    },
+    {
+      "id": 3,
+      "cantidad": 1,
+      "precio_unitario": 99.50
+    }
+  ]
+}
+```
+
+### PUT /ventas/id - Actualizar una venta
+
+**Request:**
+
+- Método: PUT
+- URL: http://localhost:4000/ventas/id
+- Headers:
+  - Content-Type: application/json
+- Body:
+```json
+{
+  "fecha": "2023-11-20 14:30:00",
+  "total_productos": 3,
+  "total_precio": 159.97,
+  "usuario_id": 1,
+  "productos": [
+    {
+      "id": 4,
+      "cantidad": 2,
+      "precio_unitario": 29.99
+    },
+    {
+      "id": 5,
+      "cantidad": 1,
+      "precio_unitario": 99.99
+    }
+  ]
 }
 ```
 
 **Response exitoso (201):**
+Para que todo salga bien nos tenemos que asegurar que el usuarios si exista y que 
 ```json
 {
-  "id": 3,
-  "fecha": "2023-10-25T15:30:45.000Z",
-  "producto": 1,
-  "cantidad": 1
+  "message": "Venta actualizada correctamente"
 }
 ```
+
+### POST /ventas - Registrar una nueva venta
+
+**Request:**
+
+- Método: POST
+- URL: http://localhost:4000/ventas/check-stock
+- Headers:
+  - Content-Type: application/json
+- Body:
+```json
+check-stock
+```
+
+**Response exitoso (201):**
+Para que todo salga bien nos tenemos que asegurar que el usuarios si exista y que 
+```json
+{
+  "tieneStock": false
+}
+```
+
 
 ---
 
